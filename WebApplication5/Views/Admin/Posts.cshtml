@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebApplication5.Models.Post>
+
+@{
+    ViewBag.Title = "Posts";
+    Layout = "~/Views/Admin/_AdminNav.cshtml";
+}
+
+<h2>Posts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddPost")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleBody)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Approve)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Likes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dislikes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Viewers)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleBody)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            <img src="@Url.Content(item.image)" width="100" height="100" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Approve)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Likes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dislikes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Viewers)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.post_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.post_id }) |
+            @Html.ActionLink("Delete", "DeletePost", new { id=item.post_id })
+        </td>
+    </tr>
+}
+
+</table>

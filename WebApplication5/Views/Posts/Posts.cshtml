@@ -1,0 +1,104 @@
+﻿@model IEnumerable<WebApplication5.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Index</h2>
+<div class="container">
+
+    <br />
+    @Html.Partial("_navbareditor")
+    <label> Search</label>
+    <div style="display:flex;">
+        <input type="text" , id="Search" placeholder="Search by:Type,Date,Body" class="form-control" />
+        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+    </div>
+
+  
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.post_id)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ArticleTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArticleBody)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.post_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArticleTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArticleBody)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.image)" width="100" height="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.post_id }) |
+                    @Html.ActionLink("Details", "Editor_Details_posts", new { id = item.post_id }) |
+                    @Html.ActionLink("Delete", "DeletePost", new { id = item.post_id })|
+                    @Html.ActionLink("Reply", "Reply", new { id = item.post_id })|
+                </td>
+            </tr>
+        }
+
+    </table>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $("#Search").on("keyup", function () {
+            var textSearch = $(this).val();
+            $("table tr").each(function (results) {
+                if (results != 0) {
+                    var Type = $(this).find("td:nth-child(6)").text();
+                    var Date = $(this).find("td:nth-child(4)").text();
+                    var ArticleBody = $(this).find("td:nth-child(3)").text();
+                    if (Type.indexOf(textSearch) !== 0 && Type.toLowerCase().indexOf(textSearch.toLowerCase()) < 0
+                        && Date.indexOf(textSearch) !== 0 && Date.toLowerCase().indexOf(textSearch.toLowerCase()) < 0
+                        && ArticleBody.indexOf(textSearch) !== 0 && ArticleBody.toLowerCase().indexOf(textSearch.toLowerCase()) < 0) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+
+
+                }
+            });
+        });
+
+
+
+    </script>

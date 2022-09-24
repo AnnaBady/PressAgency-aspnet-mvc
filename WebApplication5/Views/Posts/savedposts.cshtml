@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplication5.Models.Favorite>
+
+@{
+    ViewBag.Title = "savedposts";
+
+}
+
+<h2>savedposts</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fav_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Post.ArticleTitle)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Post.image)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fav_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Post.ArticleTitle)
+            </td>
+
+            <td>
+                <img src="@Url.Content(item.Post.image)" width="100" height="100" />
+            </td>
+            <td>
+
+                @Html.ActionLink("Delete", "Deletesave", new { id = item.fav_id })
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Back", "viewerPage")
+</div>

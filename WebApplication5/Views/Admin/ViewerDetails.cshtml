@@ -1,0 +1,73 @@
+﻿[9:19 PM, 6/6/2021] Anna Uni: @model WebApplication5.Models.Viewer
+
+@{ ViewBag.Title = "ViewerDetails";
+                Layout = "~/Views/Admin/_AdminNav.cshtml"; }
+
+<h2>ViewerDetails</h2>
+
+<div>
+    <h4>Viewer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            <img src="@Url.Content(Model.Photo)" width="100" height="100" />
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Viewers")
+</p>

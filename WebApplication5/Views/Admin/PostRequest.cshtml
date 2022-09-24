@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebApplication5.Models.Post>
+
+@{
+    ViewBag.Title = "PostRequest";
+    Layout = "~/Views/Admin/_AdminNav.cshtml";
+}
+
+<h2>Post's Request</h2>
+
+<p>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Approve)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Approve)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.post_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.post_id }) |
+            @Html.ActionLink("Delete", "DeletePosts", new { id=item.post_id })
+        </td>
+    </tr>
+}
+
+</table>

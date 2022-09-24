@@ -1,0 +1,1 @@
+﻿alter table Posts add post_id int  identity(1,1);

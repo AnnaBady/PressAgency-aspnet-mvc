@@ -1,0 +1,274 @@
+﻿@model IEnumerable<WebApplication5.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+
+    <br />
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Press Agency", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+
+                    @{ if (Session.Keys.Count == 0)
+                        {
+
+
+                            <ul class="navbar-right list-inline form-inline">
+                                <form class="list-inline form-group" method="post">
+                                    <li method="post">
+                                        <button type="button" class="btn btn-primary margin-top" data-toggle="modal" data-target="#exampleModal">
+                                            login
+                                        </button>
+                                    </li>
+                                </form>
+                                <form class="list-inline form-group" method="post">
+                                    <li class="">
+                                        <button type="button" class="btn btn-primary  list-inline margin-top" data-toggle="modal" data-target="#exampleModal1">
+                                            Register
+                                        </button>
+                                    </li>
+                                </form>
+                            </ul>
+ }
+                        else
+                        {
+                            <ul class="navbar-right list-inline form-inline text-" style="color:white; font-size:17px; margin-top:10px">
+                                <li> @Session["Username"] </li>
+                                <li>
+                                    @using (Html.BeginForm("Logout", "User", FormMethod.Post))
+                                    {
+                                        <form method="post">
+
+                                            <button type="submit" class="btn btn-danger">Logout</button>
+                                        </form>}
+                                </li>
+                            </ul>
+ } }
+                    
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("Register", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label >Email</label>
+                                <input type="text"  name="Email" >
+
+                            </div>
+                            <div class="form-group">
+                                <label >Username</label>
+                                <input type="text" name="UserName">
+
+                            </div>
+                            <div class="form-group">
+                                <label >FirstName</label>
+                                <input type="text" name="FirstName">
+
+                            </div>
+                            <div class="form-group">
+                                <label >Lastname</label>
+                                <input type="text" name="Lastname" />
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password"  name="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="img">Select image:</label>
+                                <input type="file" id="image" name="img" />
+                            </div>
+                            <div class="form-group">
+                                <label >phone Number</label>
+                                <input type="text" name="PhoneNO">
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <input type="radio" id="Editor" name="Role" value="Editor">
+                                <label for="Editor">Editor</label><br>
+                                <input type="radio" id="Viewer" name="Role" value="Viewer">
+                                <label for="Viewer">Viewer</label><br>
+                                <input type="radio" id="Admin" name="Role" value="Admin">
+                                <label for="Admin">Admin</label>
+                            </div>
+                            <div class="modal-footer">
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="submit" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            }
+                            </div>
+        </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                    {
+                          @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label>
+                                Email:
+                                <div class="col-md-10">
+                                    <input type="text" name="Email" />
+                                </div>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Password:
+                                <div class="col-md-10">
+                                    <input type="password" name="password" />
+                                </div>
+                            </label>
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="radio" id="Editor" name="Role" value="Editor">
+                            <label for="Editor">Editor</label><br>
+                            <input type="radio" id="Viewer" name="Role" value="Viewer">
+                            <label for="Viewer">Viewer</label><br>
+                            <input type="radio" id="Admin" name="Role" value="Admin">
+                            <label for="Admin">Admin</label>
+                        </div>
+                        <div class="modal-footer">
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Login" class="btn btn-default" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <label class="label-success">@ViewBag.SuccessMessage</label>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <label class="label-danger">@ViewBag.FailMessage</label>
+
+                                </div>
+                            </div>
+
+                        </div>
+                            }
+                        </div>
+                </div>
+
+        </div>
+        </div>
+
+        
+<table class="table">
+    <tr>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleBody)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Viewers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Likes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dislikes)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleBody)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <img src="@Url.Content(item.image)" width="100" height="100" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Viewers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Likes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dislikes)
+            </td>
+
+        </tr>
+
+    }
+
+</table>
+                    </div> 
